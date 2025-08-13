@@ -3,45 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Scratch Store</title>
+  <title>Scratch Project Gallery</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="store-images/favicon.png" />
+  
+  <!-- Google Font: Merriweather -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  
+  <!-- SEO Meta -->
+  <meta name="description" content="Scratch Project Gallery by ChessProKing-TM. Explore fun Scratch projects and games!" />
+  <meta name="keywords" content="Scratch, projects, games, platformer, RPG, puzzle, gallery" />
+  
   <style>
+    :root {
+      --main-bg: #f0f8ff;
+      --main-green: #008000;
+      --hover-green: #004d00;
+      --text-gray: #555555;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: #f0f8ff;
-      font-family: "Times New Roman", Times, serif;
+      background-color: var(--main-bg);
+      font-family: 'Merriweather', serif;
       margin: 0;
       padding: 0;
+      color: var(--text-gray);
+      line-height: 1.6;
     }
+
     h1, h2 {
       color: black;
       font-weight: bold;
       text-align: center;
       margin: 1rem 0;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
     }
     h1 {
       font-size: 30px;
+      animation-delay: 0.2s;
     }
     h2 {
       font-size: 28px;
+      animation-delay: 0.4s;
     }
+
     a {
-      color: green;
+      color: var(--main-green);
       font-size: 20px;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
+    a:hover, a:focus {
+      color: var(--hover-green);
+      outline: none;
+    }
+    a:focus-visible {
+      outline: 2px solid var(--hover-green);
+      outline-offset: 2px;
+    }
+
     p {
-      color: gray;
+      color: var(--text-gray);
       font-size: 16px;
       font-weight: lighter;
       text-align: center;
       margin: 0.5rem 0 2rem 0;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.6s;
     }
+
     .game-title {
-      color: green;
+      color: var(--main-green);
       font-weight: bold;
       font-size: 20px;
       text-align: center;
       margin: 0.5rem 0 0.2rem 0;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.8s;
     }
+
     .contact {
       color: black;
       font-size: 20px;
@@ -49,11 +98,21 @@
       text-align: center;
       padding: 1rem 0;
     }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--main-bg);
+      padding: 0.5rem 0;
+      z-index: 10;
+      box-shadow: 0 2px 5px var(--shadow-color);
+    }
+
     nav ul {
       list-style: none;
       padding: 0;
       text-align: center;
-      margin: 0.5rem 0 2rem 0;
+      margin: 0.5rem 0 1rem 0;
     }
     nav ul li {
       display: inline;
@@ -62,55 +121,208 @@
     nav ul li a:hover {
       text-decoration: underline;
     }
+    nav ul li a[href="#bestseller"]:hover {
+      text-decoration: none;
+      color: var(--hover-green);
+    }
+    nav ul li a.active {
+      color: var(--hover-green);
+      border-bottom: 2px solid var(--hover-green);
+      padding-bottom: 2px;
+    }
+
     hr {
       border: none;
       border-top: 1px solid #ccc;
       margin: 2rem 0;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+      animation-delay: 1s;
     }
+
     img {
       display: block;
       margin: 0 auto 0.5rem auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px var(--shadow-color);
+      max-width: 100%;
+      height: auto;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+      animation-delay: 1.2s;
+    }
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Remove price styles because no prices now */
+    /* Responsive design */
+    @media (max-width: 600px) {
+      nav ul li {
+        display: block;
+        margin: 0.5rem 0;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      a {
+        font-size: 18px;
+      }
+      p, .game-title {
+        font-size: 16px;
+      }
+      #topBtn {
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+    }
+
+    #topBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--main-green);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 18px;
+      display: block !important; /* Always show for testing */
+      transition: background-color 0.3s ease;
+    }
+    #topBtn:hover, #topBtn:focus {
+      background: var(--hover-green);
+      outline: none;
+    }
+    #topBtn:focus-visible {
+      outline: 2px solid var(--hover-green);
+      outline-offset: 2px;
+    }
+
+    footer {
+      background: var(--main-bg);
+      padding: 1rem 0;
+      border-top: 1px solid #ccc;
+      text-align: center;
+      font-size: 18px;
+      color: var(--text-gray);
+    }
+    footer a {
+      color: var(--main-green);
+      font-weight: bold;
+    }
+    footer a:hover, footer a:focus {
+      color: var(--hover-green);
+      outline: none;
+    }
+    footer a:focus-visible {
+      outline: 2px solid var(--hover-green);
+      outline-offset: 2px;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
 <header>
-  <h1>Scratch Store by ChessProKing-TM</h1>
-  <nav>
+  <h1>Scratch Project Gallery by ChessProKing-TM</h1>
+  <p>Welcome to the Scratch Store! Explore fun Scratch projects and games!</p>
+  <nav aria-label="Primary navigation">
     <ul>
-      <li><a href="#bestseller">Best Selling Projects</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a class="active" href="#bestseller">Best Projects</a></li>
+      <li><a href="#projects">Other Projects</a></li>
     </ul>
-  </nav>  
+  </nav>
 </header>
 <main>
-  <hr>
-  <section id="bestseller">
-    <h2>Best Seller Projects</h2>
-    <img src="store-images/1100198505_282x210.png" alt="Kingdom of Solandria" height="210" width="282">
-    <h2 class="game-title">Kingdom of Solandria</h2>
-    <p>A RPG pixel platformer! Only $7.99.</p>
-    <img src="store-images/cover2.png" alt="Round and Wound" height="210" width="282">
-    <h2 class="game-title">Round and Wound</h2>
-    <p>New Game! Puzzle platformer with a loopy twist! Only $5.99.</p>
+  <hr />
+  <section id="bestseller" tabindex="-1">
+    <h2>Best Projects</h2>
+    <a href="https://scratch.mit.edu/projects/1100198505/" target="_blank" rel="noopener noreferrer">
+      <img src="store-images/1100198505_282x210.png" alt="Kingdom of Solandria project screenshot" height="210" width="282" />
+      <h2 class="game-title">Kingdom of Solandria</h2>
+    </a>
+    <p><a href="https://scratch.mit.edu/projects/1100198505/" target="_blank" rel="noopener noreferrer">View on Scratch</a></p>
+
+    <a href="https://scratch.mit.edu/projects/cover2/" target="_blank" rel="noopener noreferrer">
+      <img src="store-images/cover2.png" alt="Round and Wound project screenshot" height="210" width="282" />
+      <h2 class="game-title">Round and Wound</h2>
+    </a>
+    <p>Coming soon!</p>
   </section>
-  <hr>
-  <section id="projects">
-    <h2>Projects</h2>
-    <img src="store-images/1093292770_144x108.png" alt="Forest Cafe" height="108" width="144">
-    <h2 class="game-title">Forest Cafe</h2>
-    <p>Fast paced cozy restaurant game! Only $3.99.</p>
-    <img src="store-images/1176548170_144x108.png" alt="Scratch Quiz" height="108" width="144">
-    <h2 class="game-title">Scratch Quiz</h2>
-    <p>Quiz about Scratch! Only $2.99.</p>
-    <img src="store-images/964770567_144x108.png" alt="Darkness" height="108" width="144">
-    <h2 class="game-title">Darkness. A Platformer</h2>
-    <p>Platformer with a shadowy twist! Only $5.99.</p>
+  <hr />
+  <section id="projects" tabindex="-1">
+    <h2>Other Projects</h2>
+    <a href="https://scratch.mit.edu/projects/1093292770/" target="_blank" rel="noopener noreferrer">
+      <img src="store-images/1093292770_144x108.png" alt="Forest Cafe project screenshot" height="108" width="144" />
+      <h2 class="game-title">Forest Cafe</h2>
+    </a>
+    <p><a href="https://scratch.mit.edu/projects/1093292770/" target="_blank" rel="noopener noreferrer">View on Scratch</a></p>
+
+    <a href="https://scratch.mit.edu/projects/1176548170/" target="_blank" rel="noopener noreferrer">
+      <img src="store-images/1176548170_144x108.png" alt="Scratch Quiz project screenshot" height="108" width="144" />
+      <h2 class="game-title">Scratch Quiz</h2>
+    </a>
+    <p><a href="https://scratch.mit.edu/projects/1176548170/" target="_blank" rel="noopener noreferrer">View on Scratch</a></p>
+
+    <a href="https://scratch.mit.edu/projects/964770567/" target="_blank" rel="noopener noreferrer">
+      <img src="store-images/964770567_144x108.png" alt="Darkness project screenshot" height="108" width="144" />
+      <h2 class="game-title">Darkness. A Platformer</h2>
+    </a>
+    <p><a href="https://scratch.mit.edu/projects/964770567/" target="_blank" rel="noopener noreferrer">View on Scratch</a></p>
   </section>
-  <hr>
+  <hr />
 </main>
 <footer>
-  <p class="contact">Contact us <a target="_blank" href="https://scratch.mit.edu/users/ChessProking-tm/">at ChessProKing-TM's Scratch page</a></p>
+  <p class="contact">
+    Contact us <a target="_blank" href="https://scratch.mit.edu/users/ChessProking-tm/" rel="noopener noreferrer">at ChessProKing-TM's Scratch page</a>
+  </p>
 </footer>
+
+<!-- Back to Top Button -->
+<button
+  id="topBtn"
+  onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+  aria-label="Back to top"
+>
+  ↑ Top
+</button>
+
+<script>
+  // Show back-to-top button immediately (for testing)
+  // Remove display block !important from CSS to enable show/hide on scroll
+  const topBtn = document.getElementById("topBtn");
+  window.onscroll = function () {
+    if (
+      document.body.scrollTop > 200 ||
+      document.documentElement.scrollTop > 200
+    ) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+  // Initially hide or show button as needed
+  if (
+    document.body.scrollTop > 200 ||
+    document.documentElement.scrollTop > 200
+  ) {
+    topBtn.style.display = "block";
+  } else {
+    topBtn.style.display = "none";
+  }
+</script>
 </body>
 </html>
+
